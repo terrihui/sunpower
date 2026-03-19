@@ -32,6 +32,7 @@
       width: 100%; height: 100%;
       object-fit: cover;
       z-index: -1;
+      opacity: 0.8;
     }
 
     #startBtn {
@@ -101,8 +102,9 @@
 
   <!-- Intro Splash with Video -->
   <div id="intro">
+    <!-- 修正：使用GitHub Pages完整路徑 -->
     <video id="bg-video" autoplay muted loop playsinline>
-      <source src="/videos/Banner.mp4" type="video/mp4">
+      <source src="https://terrihui.github.io/sunpower/videos/Banner.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <button id="startBtn">START</button>
@@ -170,10 +172,9 @@
     const startBtn = document.getElementById('startBtn');
     const mainContent = document.getElementById('main-content');
 
-    // 5 秒後顯示 START 按鈕（可改成你影片長度，例如 8000 = 8 秒）
+    // 5 秒後顯示 START 按鈕
     setTimeout(() => {
-      startBtn.style.opacity = '1';
-      startBtn.style.transform = 'translateY(0)';
+      startBtn.classList.add('show');
     }, 5000);
 
     // 按 START 進入主頁
@@ -182,7 +183,7 @@
       setTimeout(() => {
         intro.style.display = 'none';
         mainContent.classList.add('visible');
-      }, 1200); // 淡出時間
+      }, 1200);
     });
   </script>
 
