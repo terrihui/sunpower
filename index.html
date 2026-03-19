@@ -39,7 +39,7 @@
       color: #0D47A1;
       border: none;
       padding: 20px 80px;
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       font-weight: bold;
       border-radius: 60px;
       cursor: pointer;
@@ -78,13 +78,30 @@
     a:hover { text-decoration: underline; }
     .contact-link { color: white; }
     .contact-link:hover { text-decoration: underline; }
+
+    /* Facebook Button Style */
+    .fb-button {
+      background: #1877F2;
+      color: white;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: background 0.3s;
+    }
+    .fb-button:hover { background: #166fe5; }
+    .fb-icon { width: 24px; height: 24px; margin-right: 10px; }
   </style>
 </head>
 <body>
 
-  <!-- Intro with Video -->
+  <!-- Intro Splash with Video -->
   <div id="intro">
-    <video id="bg-video" autoplay muted playsinline>
+    <video id="bg-video" autoplay muted loop playsinline>
       <source src="/videos/Banner.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -104,6 +121,15 @@
         <p>隨著大氣污染日益嚴重，推廣清潔能源已成為全球共識。太陽能發電作為清潔能源之一，具有非常光明的發展前景。</p>
         <p>太陽能電站投資周期長、風險低、收益穩定。在政府財政優惠政策下，投資太陽能電站將帶來豐厚遠期收益。</p>
         <p>我們擁有多年太陽能發電領域經驗，提供全流程方案：售前咨詢、設計、安裝、售後跟進、系統維護。未來繼續深耕太陽能領域。</p>
+
+        <!-- Facebook 專頁按鈕 -->
+        <div style="text-align: center; margin: 40px 0;">
+          <a href="https://www.facebook.com/profile.php?id=100064112018790"
+             target="_blank" rel="noopener noreferrer" class="fb-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="fb-icon">
+            查看我們的 Facebook 專頁
+          </a>
+        </div>
       </div>
 
       <div class="section">
@@ -143,19 +169,12 @@
     const intro = document.getElementById('intro');
     const startBtn = document.getElementById('startBtn');
     const mainContent = document.getElementById('main-content');
-    const video = document.getElementById('bg-video');
 
-    // 影片播完後顯示 START 按鈕（如果影片短，可用 ended 事件）
-    video.addEventListener('ended', () => {
-      startBtn.style.opacity = '1';
-      startBtn.style.transform = 'translateY(0)';
-    });
-
-    // 或者用時間倒數（例如 5 秒後強制出現）
+    // 5 秒後顯示 START 按鈕（可改成你影片長度，例如 8000 = 8 秒）
     setTimeout(() => {
       startBtn.style.opacity = '1';
       startBtn.style.transform = 'translateY(0)';
-    }, 5000);  // 改成你影片長度 + 少少 buffer，例如 8000 = 8秒
+    }, 5000);
 
     // 按 START 進入主頁
     startBtn.addEventListener('click', () => {
@@ -163,7 +182,7 @@
       setTimeout(() => {
         intro.style.display = 'none';
         mainContent.classList.add('visible');
-      }, 1200);  // 同步淡出時間
+      }, 1200); // 淡出時間
     });
   </script>
 
