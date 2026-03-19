@@ -2,14 +2,15 @@
 <html lang="zh-HK">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 1. 視口標籤：關鍵！告訴瀏覽器以設備寬度渲染 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>太陽力量科技有限公司 – 專業太陽能方案</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family: 'Noto Sans TC', sans-serif; background:#f8f9fa; color:#333; overflow-x:hidden; }
 
-    /* Intro Splash with Video */
+    /* Intro Splash 響應式調整 */
     #intro {
       position: fixed;
       top: 0; left: 0;
@@ -35,12 +36,13 @@
       opacity: 0.8;
     }
 
+    /* 2. 按鈕響應式：手機上縮小尺寸 */
     #startBtn {
       background: rgba(255,255,255,0.9);
       color: #0D47A1;
       border: none;
-      padding: 20px 80px;
-      font-size: 2.5rem;
+      padding: clamp(12px, 5vw, 20px) clamp(40px, 15vw, 80px); /* 彈性內邊距 */
+      font-size: clamp(1.5rem, 4vw, 2.5rem); /* 彈性字體 */
       font-weight: bold;
       border-radius: 60px;
       cursor: pointer;
@@ -59,50 +61,106 @@
       transform: scale(1.08);
     }
 
-    /* Main Content */
+    /* Main Content 響應式 */
     #main-content {
       opacity: 0;
       transition: opacity 1.5s ease;
     }
     #main-content.visible { opacity: 1; }
 
-    header { background: linear-gradient(to right, #0D47A1, #4CAF50); color: white; text-align: center; padding: 80px 20px; }
-    h1 { margin: 0; font-size: 3em; }
-    .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-    .section { margin-bottom: 60px; }
+    /* 3. 標頭響應式：手機上縮小字體/內邊距 */
+    header { 
+      background: linear-gradient(to right, #0D47A1, #4CAF50); 
+      color: white; 
+      text-align: center; 
+      padding: clamp(40px, 10vw, 80px) 20px; /* 彈性內邊距 */
+    }
+    h1 { 
+      margin: 0; 
+      font-size: clamp(1.8rem, 5vw, 3em); /* 彈性字體 */
+    }
+    header p {
+      font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    /* 4. 容器流動式：最大寬度+自動邊距，手機上滿寬 */
+    .container { 
+      max-width: 1000px; 
+      margin: 40px auto; 
+      padding: 0 15px; /* 手機上減少內邊距 */
+    }
+    .section { margin-bottom: clamp(30px, 8vw, 60px); }
+
+    /* 5. 徽章響應式：手機上自動換行 */
+    .badges { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px; /* 手機上縮小間距 */
+    }
+    .badge { 
+      background: #4CAF50; 
+      color: white; 
+      padding: 6px 12px; /* 手機上縮小內邊距 */
+      border-radius: 20px; 
+      font-weight: bold;
+      font-size: clamp(0.8rem, 2vw, 1rem); /* 彈性字體 */
+    }
+
+    /* 6. 列表響應式：手機上縮小字體 */
     ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; font-size: 1.2em; }
-    .badges { display: flex; flex-wrap: wrap; gap: 15px; }
-    .badge { background: #4CAF50; color: white; padding: 8px 16px; border-radius: 20px; font-weight: bold; }
-    footer { background: #333; color: white; text-align: center; padding: 20px; }
+    li { 
+      margin: 8px 0; 
+      font-size: clamp(1rem, 2.5vw, 1.2em); 
+    }
+
+    footer { 
+      background: #333; 
+      color: white; 
+      text-align: center; 
+      padding: 20px 15px; /* 手機上減少內邊距 */
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
     a { color: #0D47A1; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .contact-link { color: white; }
     .contact-link:hover { text-decoration: underline; }
 
-    /* Facebook Button Style */
+    /* Facebook按鈕響應式 */
     .fb-button {
       background: #1877F2;
       color: white;
-      padding: 16px 40px;
+      padding: 12px 30px; /* 手機上縮小內邊距 */
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 18px;
+      font-size: clamp(0.9rem, 2.5vw, 18px);
       display: inline-flex;
       align-items: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       transition: background 0.3s;
     }
-    .fb-button:hover { background: #166fe5; }
-    .fb-icon { width: 24px; height: 24px; margin-right: 10px; }
+    .fb-icon { 
+      width: clamp(20px, 4vw, 24px); 
+      height: clamp(20px, 4vw, 24px); 
+      margin-right: 8px; 
+    }
+
+    /* 7. 媒體查詢：針對小屏幕額外優化 */
+    @media (max-width: 480px) {
+      .section h2 {
+        font-size: clamp(1.2rem, 4vw, 1.8rem);
+      }
+      .fb-button {
+        width: 100%; /* 手機上按鈕滿寬 */
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Intro Splash with Video -->
   <div id="intro">
-    <!-- 修正：使用GitHub Pages完整路徑 -->
     <video id="bg-video" autoplay muted loop playsinline>
       <source src="https://terrihui.github.io/sunpower/videos/Banner.mp4" type="video/mp4">
       Your browser does not support the video tag.
@@ -124,7 +182,6 @@
         <p>太陽能電站投資周期長、風險低、收益穩定。在政府財政優惠政策下，投資太陽能電站將帶來豐厚遠期收益。</p>
         <p>我們擁有多年太陽能發電領域經驗，提供全流程方案：售前咨詢、設計、安裝、售後跟進、系統維護。未來繼續深耕太陽能領域。</p>
 
-        <!-- Facebook 專頁按鈕 -->
         <div style="text-align: center; margin: 40px 0;">
           <a href="https://www.facebook.com/profile.php?id=100064112018790"
              target="_blank" rel="noopener noreferrer" class="fb-button">
@@ -172,12 +229,10 @@
     const startBtn = document.getElementById('startBtn');
     const mainContent = document.getElementById('main-content');
 
-    // 5 秒後顯示 START 按鈕
     setTimeout(() => {
       startBtn.classList.add('show');
     }, 5000);
 
-    // 按 START 進入主頁
     startBtn.addEventListener('click', () => {
       intro.classList.add('hidden');
       setTimeout(() => {
